@@ -1,71 +1,84 @@
-<!-- resources/views/crear.blade.php -->
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Producto</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        h1 { text-align: center; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { font-size: 1.2em; display: block; margin-bottom: 8px; }
-        input, textarea { width: 100%; padding: 10px; font-size: 1em; border: 1px solid #ccc; border-radius: 4px; }
-        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; font-size: 1em; cursor: pointer; }
-        button:hover { background-color: #45a049; }
-    </style>
-</head>
-<body>
+<x-app-layout>
+    {{-- Slot para el encabezado de la página --}}
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Crear Nuevo Producto') }}
+        </h2>
+    </x-slot>
 
-<a href="/productos" class="btn btn-secondary" style="margin-bottom: 20px;">Regresar</a>
+    {{-- Contenido principal de la página --}}
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
 
-    <div class="container">
-        <h1>Crear Producto</h1>
-        
-        <!-- Mensaje de éxito -->
-        @if(session('success'))
-            <div style="background-color: #d4edda; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
-                {{ session('success') }}
+                {{-- Título del formulario --}}
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
+                    {{ __('Formulario para Crear Producto') }}
+                </h3>
+
+                {{-- Mensaje de éxito --}}
+                @if(session('success'))
+                    <div class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-3 rounded-md mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                {{-- Formulario para crear un producto --}}
+                <form action="{{ route('productos.store') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre</label>
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" required
+                               class="block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @error('name')
+                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="price" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Precio</label>
+                        <input type="number" name="price" id="price" value="{{ old('price') }}" required step="0.01"
+                               class="block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @error('price')
+                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="stock" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stock</label>
+                        <input type="number" name="stock" id="stock" value="{{ old('stock') }}" required
+                               class="block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @error('stock')
+                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
+                        <textarea name="description" id="description" rows="4"
+                                  class="block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ old('description') }}</textarea>
+                        @error('description')
+                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:ring ring-green-300 disabled:opacity-25 transition ease-in-out duration-150">
+                            {{ __('Crear Producto') }}
+                        </button>
+                    </div>
+                </form>
+
+                {{-- Botón "Regresar" llamativo --}}
+                <div class="mt-8 text-center">
+                    <a href="{{ route('productos.index') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 border border-transparent rounded-full font-bold text-lg text-white uppercase tracking-wider shadow-lg hover:from-purple-700 hover:to-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-300 transform hover:scale-105">
+                        <i class="bi bi-arrow-left-circle mr-3"></i> {{-- Icono de flecha --}}
+                        {{ __('Regresar a Productos') }}
+                    </a>
+                </div>
+
             </div>
-        @endif
-        
-        <!-- Formulario para crear un producto -->
-        <form action="/productos" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="name">Nombre</label>
-                <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-                @error('name')
-                    <div style="color: red;">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="price">Precio</label>
-                <input type="number" name="price" id="price" value="{{ old('price') }}" required>
-                @error('price')
-                    <div style="color: red;">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="stock">Stock</label>
-                <input type="number" name="stock" id="stock" value="{{ old('stock') }}" required>
-                @error('stock')
-                    <div style="color: red;">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="description">Descripción</label>
-                <textarea name="description" id="description" rows="4">{{ old('description') }}</textarea>
-                @error('description')
-                    <div style="color: red;">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <button type="submit">Crear Producto</button>
-        </form>
+        </div>
     </div>
-</body>
-</html>
+</x-app-layout>
