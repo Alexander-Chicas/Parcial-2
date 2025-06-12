@@ -17,6 +17,7 @@
                 {{-- Contenedor de las tarjetas con un grid responsivo y espacio entre ellas --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
+                    {{-- Tarjeta de Usuarios --}}
                     <a href="{{ route('usuarios.index') }}" class="group relative flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-in-out">
                         <i class="bi bi-people text-6xl text-white opacity-80 group-hover:opacity-100 transition-opacity duration-300"></i>
                         <h3 class="mt-4 text-3xl font-bold text-white text-center">Usuarios</h3>
@@ -24,6 +25,7 @@
                         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl"></div>
                     </a>
 
+                    {{-- Tarjeta de Productos --}}
                     <a href="{{ route('productos.index') }}" class="group relative flex flex-col items-center justify-center p-8 bg-gradient-to-br from-green-500 to-green-700 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-in-out">
                         <i class="bi bi-box-seam text-6xl text-white opacity-80 group-hover:opacity-100 transition-opacity duration-300"></i>
                         <h3 class="mt-4 text-3xl font-bold text-white text-center">Productos</h3>
@@ -31,6 +33,7 @@
                         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl"></div>
                     </a>
 
+                    {{-- Tarjeta de Ventas --}}
                     <a href="{{ route('ventas.index') }}" class="group relative flex flex-col items-center justify-center p-8 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-in-out">
                         <i class="bi bi-cash-coin text-6xl text-white opacity-80 group-hover:opacity-100 transition-opacity duration-300"></i>
                         <h3 class="mt-4 text-3xl font-bold text-white text-center">Ventas</h3>
@@ -38,12 +41,7 @@
                         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl"></div>
                     </a>
 
-                    <a href="{{ route('alertas') }}" class="group relative flex flex-col items-center justify-center p-8 bg-gradient-to-br from-red-500 to-red-700 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-in-out">
-                        <i class="bi bi-exclamation-triangle text-6xl text-white opacity-80 group-hover:opacity-100 transition-opacity duration-300"></i>
-                        <h3 class="mt-4 text-3xl font-bold text-white text-center">Alertas</h3>
-                        <p class="mt-2 text-white text-opacity-80 text-center text-sm">Recibe notificaciones importantes.</p>
-                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl"></div>
-                    </a>
+                  
                 </div>
             </div>
         </div>

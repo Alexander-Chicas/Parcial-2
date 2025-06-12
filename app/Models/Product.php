@@ -10,7 +10,11 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'price', 'stock'
+        'name',
+        'description',
+        'price',
+        'stock',
+        'min_stock_threshold' // <--- ¡Añade esta línea!
     ];
 
     /**
@@ -20,8 +24,8 @@ class Product extends Model
     public function sales()
     {
         return $this->belongsToMany(Sale::class, 'sale_items')
-                    ->withPivot('quantity', 'unit_price') // <-- CAMBIO: 'price' a 'unit_price'
-                    ->withTimestamps();
+                     ->withPivot('quantity', 'unit_price')
+                     ->withTimestamps();
     }
 
     // Relación uno a muchos con el modelo Alert
